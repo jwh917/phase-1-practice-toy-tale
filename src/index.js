@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-const likeArr = []
+// const likeArr = []
 
 
 
@@ -33,7 +33,7 @@ const likeArr = []
 
 
 
-const btns = [...document.querySelectorAll(".like-btn")]
+// const btns = [...document.querySelectorAll(".like-btn")]
 
 
 const toysUrl = "http://localhost:3000/toys"
@@ -62,25 +62,56 @@ fetch(toysUrl)
         toyDiv.appendChild(toyImg)
         const toyP = document.createElement("p")
         toyP.innerHTML = element.likes + " likes"
-        // likeArr.push(element.likes)
-        // console.log(likeArr)
         toyDiv.appendChild(toyP)
         const toyButton = document.createElement("button")
+
+        toyButton.addEventListener("click",(event) => {
+          fetch(toysUrl, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"},body: JSON.stringify({
+                  "likes": element.likes
+                }),
+              })
+              
+            .then(response => response.json())
+            .then(data => {
+              console.log('Success:', data)
+              // console.log(toyDiv.id)
+          // console.log(toyButton.id)
+          if(toyDiv.id === toyButton.id){
+            //console.log("KEEP GOING")
+            element.likes = element.likes + 1
+            // console.log(element.likes)
+            toyP.innerHTML = element.likes + " likes"
+            // toyDiv.appendChild(toyP)
+            })
+    
+              
+              .catch((error) => {
+                console.error('Error:', error);
+              })
+         })
         toyButton.className = "like-btn"
         toyButton.setAttribute("id", element.id)
         toyButton.innerHTML = "Like ❤️"
         toyDiv.appendChild(toyButton)
         const toyColl = document.getElementById("toy-collection")
         toyColl.appendChild(toyDiv)
-        likeArr.push(element.likes)
-        //goThruButtons()
-        const btns = [...document.querySelectorAll(".like-btn")]
+        // likeArr.push(element.likes)
 
-      for(const element of btns){
-        document.addEventListener("click",(event) => {
-          console.log(element)
-        })
-      }
+
+        //goThruButtons()
+        // const btns = [...document.querySelectorAll(".like-btn")]
+
+
+        // for(const element of btns){
+        //   document.addEventListener("click",(event) => {
+        //     console.log(element)
+        //   })
+
+        // }
 
 
 
@@ -113,7 +144,7 @@ const jessToy = {"name": "Jessie", "image": "https://vignette.wikia.nocookie.net
 
 
 
-const toysUrl = "http://localhost:3000/toys"
+// const toysUrl = "http://localhost:3000/toys"
 
 
 
@@ -198,46 +229,8 @@ function createNewtoy(event) {
     //   console.log(data)
     // )
 
-const toysUrlId = "http://localhost:3000/toys/:id"
 
 
 
-
-
-
-
-
-//   for(const elements of btns){
-//     console.log(elements.id)
-//     console.log(likeArr)
-//   }
-
-
-
-
-    // fetch(toysUrl, {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json"
-    //   },
-    //   body: JSON.stringify(),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   // console.log('Success:', data)
-    //   const toyId = data.id
-
-
-     
-
-    //   .catch((error) => {
-    //     console.error('Error:', error);
-    //   })
-    
-
-
-
-
-
-
+   
+ 
