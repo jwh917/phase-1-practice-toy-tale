@@ -13,28 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-// const likeArr = []
-
-
-
-// for(const element of btns){
-//   document.addEventListener("click",(event) => {
-//     console.log(element)
-//   })
-// }
-
-// function goThruButtons(){
-//   for (let i = 0; i < btns.length; i++){
-//     btns[i].addEventListener("click", function(){
-//       console.log("i work")
-//     })
-//   }
-// }
-
-
-
-// const btns = [...document.querySelectorAll(".like-btn")]
-
 
 const toysUrl = "http://localhost:3000/toys"
 
@@ -66,19 +44,8 @@ fetch(toysUrl)
         const toyButton = document.createElement("button")
 
         toyButton.addEventListener("click",(event) => {
-          fetch(toysUrl, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json"},body: JSON.stringify({
-                  "likes": element.likes
-                }),
-              })
-              
-            .then(response => response.json())
-            .then(data => {
-              console.log('Success:', data)
-              // console.log(toyDiv.id)
+          
+          console.log(toyDiv.id)
           // console.log(toyButton.id)
           if(toyDiv.id === toyButton.id){
             //console.log("KEEP GOING")
@@ -86,12 +53,25 @@ fetch(toysUrl)
             // console.log(element.likes)
             toyP.innerHTML = element.likes + " likes"
             // toyDiv.appendChild(toyP)
-            })
-    
+            fetch(`http://localhost:3000/toys/${toyDiv.id}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"},
+                body: JSON.stringify({
+                  "likes": element.likes
+                }),
+              })
+              
+              .then(response => response.json())
+              .then(data => {
+                console.log('Success:', data)
+              })
               
               .catch((error) => {
                 console.error('Error:', error);
               })
+          }
          })
         toyButton.className = "like-btn"
         toyButton.setAttribute("id", element.id)
@@ -99,35 +79,7 @@ fetch(toysUrl)
         toyDiv.appendChild(toyButton)
         const toyColl = document.getElementById("toy-collection")
         toyColl.appendChild(toyDiv)
-        // likeArr.push(element.likes)
-
-
-        //goThruButtons()
-        // const btns = [...document.querySelectorAll(".like-btn")]
-
-
-        // for(const element of btns){
-        //   document.addEventListener("click",(event) => {
-        //     console.log(element)
-        //   })
-
-        // }
-
-
-
-        // likeArr.forEach(element => {
-        //   document.addEventListener("click", (event) => {
-        //     console.log(element)
-        //   })
-
-        // })
-
-//console.log(event)
-            //console.log(likeArr)
-
-     
-
-      
+        
       });      
 
     })
@@ -136,16 +88,8 @@ fetch(toysUrl)
 
 
 
-
-
-
 const jessToy = {"name": "Jessie", "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist", "likes": 0
 }
-
-
-
-// const toysUrl = "http://localhost:3000/toys"
-
 
 
 const submitInput = document.getElementsByClassName("submit")
@@ -155,9 +99,13 @@ submitInput.submit.addEventListener("click", (event) => {
   }
 )
 
+
 const input = document.querySelector('input')
 
 input.addEventListener('input', createNewtoy)
+
+const toysUrl = "http://localhost:3000/toys"
+
 
 function createNewtoy(event) {
 
@@ -170,6 +118,7 @@ function createNewtoy(event) {
   
       console.log(jessToy.name)
       console.log(jessToy.image)
+
       // //WORKS FROM HERE
       fetch(toysUrl, {
         method: "POST",
@@ -218,7 +167,6 @@ function createNewtoy(event) {
 }
 
 
-
     //     // DELETE
     // fetch(toysUrl, {
     //   method:'DELETE'
@@ -229,8 +177,7 @@ function createNewtoy(event) {
     //   console.log(data)
     // )
 
-
-
-
-   
- 
+    //FINSINED LAB 
+    //PERSONAL CODE - FIX
+    //DIFFERENT PICS WITH IMG
+    //NEW CARD DIDNT LIKE
